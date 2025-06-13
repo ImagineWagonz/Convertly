@@ -1,421 +1,502 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Convertly | Smart File Conversion</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#4361ee',
-                        secondary: '#3a0ca3',
-                        accent: '#4cc9f0',
-                        dark: '#14213d',
-                        light: '#f8f9fa'
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif']
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#4361ee",
+              secondary: "#3a0ca3",
+              accent: "#4cc9f0",
+              dark: "#14213d",
+              light: "#f8f9fa",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
     </script>
     <style>
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      .glass-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .neumorphic {
+        border-radius: 16px;
+        background: #f0f0f0;
+        box-shadow: 8px 8px 16px #d9d9d9, -8px -8px 16px #ffffff;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(135deg, #4361ee, #3a0ca3);
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .upload-area {
+        border: 2px dashed #4361ee;
+        transition: all 0.3s ease;
+      }
+
+      .upload-area:hover {
+        background-color: rgba(67, 97, 238, 0.05);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #4361ee, #3a0ca3);
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        border: 2px solid #ff6b35;
+        transition: all 0.3s ease;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 107, 53, 0.1);
+      }
+
+      .progress-bar {
+        height: 8px;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #4361ee, #4cc9f0);
+        transition: width 0.5s ease;
+      }
+
+      .file-item {
+        transition: all 0.3s ease;
+      }
+
+      .file-item:hover {
+        background-color: rgba(67, 97, 238, 0.05);
+      }
+
+      .tool-card {
+        transition: all 0.3s ease;
+      }
+
+      .tool-card:hover {
+        transform: scale(1.03);
+      }
+
+      .success-animation {
+        animation: success 1s ease;
+      }
+
+      @keyframes success {
+        0% {
+          transform: scale(0.8);
+          opacity: 0;
         }
-        
-        .neumorphic {
-            border-radius: 16px;
-            background: #f0f0f0;
-            box-shadow:  8px 8px 16px #d9d9d9, 
-                        -8px -8px 16px #ffffff;
+        50% {
+          transform: scale(1.1);
+          opacity: 1;
         }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+        100% {
+          transform: scale(1);
         }
-        
-        .card-hover {
-            transition: all 0.3s ease;
+      }
+
+      .pulse {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.4);
         }
-        
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        70% {
+          box-shadow: 0 0 0 10px rgba(67, 97, 238, 0);
         }
-        
-        .upload-area {
-            border: 2px dashed #4361ee;
-            transition: all 0.3s ease;
+        100% {
+          box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
         }
-        
-        .upload-area:hover {
-            background-color: rgba(67, 97, 238, 0.05);
+      }
+
+      .nav-link {
+        position: relative;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #4361ee;
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .active-nav::after {
+        width: 100%;
+      }
+
+      .form-input:focus {
+        box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+      }
+
+      .conversion-animation {
+        animation: conversion 1.5s infinite alternate;
+      }
+
+      @keyframes conversion {
+        0% {
+          transform: translateX(0);
         }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #4361ee, #3a0ca3);
-            transition: all 0.3s ease;
+        100% {
+          transform: translateX(10px);
         }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid #FF6B35;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 107, 53, 0.1);
-        }
-        
-        .progress-bar {
-            height: 8px;
-            border-radius: 4px;
-            background: linear-gradient(90deg, #4361ee, #4cc9f0);
-            transition: width 0.5s ease;
-        }
-        
-        .file-item {
-            transition: all 0.3s ease;
-        }
-        
-        .file-item:hover {
-            background-color: rgba(67, 97, 238, 0.05);
-        }
-        
-        .tool-card {
-            transition: all 0.3s ease;
-        }
-        
-        .tool-card:hover {
-            transform: scale(1.03);
-        }
-        
-        .success-animation {
-            animation: success 1s ease;
-        }
-        
-        @keyframes success {
-            0% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(67, 97, 238, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0); }
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #4361ee;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .active-nav::after {
-            width: 100%;
-        }
-        
-        .form-input:focus {
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-        }
-        
-        .conversion-animation {
-            animation: conversion 1.5s infinite alternate;
-        }
-        
-        @keyframes conversion {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(20px); }
-        }
+      }
     </style>
-</head>
-<body class="bg-gray-50 font-sans text-gray-800 min-h-screen">
+  </head>
+  <body class="bg-gray-50 font-sans text-gray-800 min-h-screen">
     <!-- Navbar -->
-    <nav class="glass-card fixed w-full z-50 py-4 px-6 flex justify-between items-center">
-        <div class="flex items-center">
-            <div class="w-10 h-10 rounded-full bg-[#FF6B35] flex items-center justify-center mr-3">
-                <i class="fas fa-exchange-alt text-white text-lg"></i>
-            </div>
-            <span class="text-xl font-bold text-[#FF6B35]">Convertly</span>
+    <nav
+      class="glass-card fixed w-full z-50 py-4 px-6 flex justify-between items-center"
+    >
+      <div class="flex items-center">
+        <div
+          class="w-10 h-10 rounded-full bg-[#FF6B35] flex items-center justify-center mr-3"
+        >
+          <i class="fas fa-exchange-alt text-white text-lg"></i>
         </div>
-        
-        <div class="hidden md:flex space-x-8">
-            <a href="#home" class="nav-link text-gray-700 font-medium active-nav">Home</a>
-            <a href="#tools" class="nav-link text-gray-700 font-medium">Tools</a>
-            <a href="#dashboard" class="nav-link text-gray-700 font-medium">Dashboard</a>
-            <a href="#about" class="nav-link text-gray-700 font-medium">About</a>
-            <a href="#contact" class="nav-link text-gray-700 font-medium">Contact</a>
-        </div>
-        
-        <div class="flex items-center space-x-4">
-            <button id="loginBtn" class="btn-secondary px-4 py-2 rounded-lg font-medium text-[#FF6B35]">Log In</button>
-            <button id="signupBtn" class="btn-primary px-4 py-2 rounded-lg font-medium text-white">Sign Up</button>
-            <button class="md:hidden text-gray-700">
-                <i class="fas fa-bars text-xl"></i>
-            </button>
-        </div>
+        <span class="text-xl font-bold text-[#FF6B35]">Convertly</span>
+      </div>
+
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="nav-link text-black font-medium active-nav"
+          >Home</a
+        >
+        <a href="#tools" class="nav-link text-black font-medium">Tools</a>
+        <a href="#dashboard" class="nav-link text-black font-medium"
+          >Dashboard</a
+        >
+        <a href="#about" class="nav-link text-black font-medium">About</a>
+        <a href="#contact" class="nav-link text-black font-medium">Contact</a>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <button
+          id="loginBtn"
+          class="btn-secondary px-4 py-2 rounded-lg font-medium text-[#FF6B35]"
+        >
+          Log In
+        </button>
+        <button
+          id="signupBtn"
+          class="btn-primary px-4 py-2 rounded-lg font-medium text-white"
+        >
+          Sign Up
+        </button>
+        <button class="md:hidden text-gray-700">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="gradient-bg pt-24 pb-20 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-12 md:mb-0">
-                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Convert Files Effortlessly</h1>
-                <p class="text-xl text-blue-100 mb-8">Transform your documents, images, audio, and videos in seconds with our powerful conversion tools.</p>
-                <div class="flex flex-wrap gap-4">
-                    <button class="btn-primary px-6 py-3 rounded-lg font-semibold text-white flex items-center">
-                        Start Converting Now
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
-                    <button class="btn-secondary px-6 py-3 rounded-lg font-semibold text-white flex items-center">
-                        <i class="fas fa-play-circle mr-2"></i>
-                        Watch Demo
-                    </button>
-                </div>
-            </div>
-            <div class="md:w-1/2 flex justify-center">
-                <div class="relative">
-                    <div class="glass-card w-80 h-80 rounded-2xl flex flex-col items-center justify-center p-6">
-                        <div class="w-24 h-24 rounded-full bg-blue-500 flex items-center justify-center mb-6">
-                            <i class="fas fa-file-export text-white text-4xl"></i>
-                        </div>
-                        <div class="flex mb-6">
-                            <div class="w-12 h-12 rounded-lg bg-white flex items-center justify-center mx-2">
-                                <i class="fas fa-file-image text-blue-500 text-xl"></i>
-                            </div>
-                            <div class="conversion-animation flex items-center mx-2">
-                                <i class="fas fa-arrow-right text-white text-xl"></i>
-                            </div>
-                            <div class="w-12 h-12 rounded-lg bg-white flex items-center justify-center mx-2">
-                                <i class="fas fa-file-pdf text-red-500 text-xl"></i>
-                            </div>
-                        </div>
-                        <p class="text-blue-100 text-center">Convert between 50+ file formats with just a few clicks</p>
-                    </div>
-                    <div class="absolute -top-6 -right-6 w-32 h-32 bg-yellow-400 rounded-2xl flex items-center justify-center transform rotate-12">
-                        <span class="text-white font-bold text-lg">100% Secure</span>
-                    </div>
-                    <div class="absolute -bottom-6 -left-6 w-28 h-28 bg-green-400 rounded-2xl flex items-center justify-center transform -rotate-12">
-                        <span class="text-white font-bold">Fast & Easy</span>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-12 md:mb-0">
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+            Convert Files Effortlessly
+          </h1>
+          <p class="text-xl text-blue-100 mb-8">
+            Transform your documents, images, audio, and videos in seconds with
+            our powerful conversion tools.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button
+              id="startConvertingBtn"
+              class="btn-primary px-6 py-3 rounded-lg font-semibold text-white flex items-center"
+            >
+              Start Converting Now
+              <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+          </div>
         </div>
+        <div class="md:w-1/2 flex justify-center">
+          <div class="relative">
+            <div
+              class="glass-card w-80 h-80 rounded-2xl flex flex-col items-center justify-center p-6"
+            >
+              <div
+                class="w-24 h-24 rounded-full bg-blue-500 flex items-center justify-center mb-6"
+              >
+                <i class="fas fa-file-export text-white text-4xl"></i>
+              </div>
+              <div class="flex mb-6">
+                <div
+                  class="w-12 h-12 rounded-lg bg-white flex items-center justify-center mx-2"
+                >
+                  <i class="fas fa-file-image text-blue-500 text-xl"></i>
+                </div>
+                <div class="conversion-animation flex items-center mx-2">
+                  <i class="fas fa-arrow-right text-white text-xl"></i>
+                </div>
+                <div
+                  class="w-12 h-12 rounded-lg bg-white flex items-center justify-center mx-2"
+                >
+                  <i class="fas fa-file-pdf text-red-500 text-xl"></i>
+                </div>
+              </div>
+              <p class="text-blue-100 text-center">
+                Convert between 50+ file formats with just a few clicks
+              </p>
+            </div>
+            <div
+              class="absolute -top-6 -right-10 w-32 h-32 bg-yellow-400 rounded-2xl flex items-center justify-center transform rotate-12"
+            >
+              <span class="text-white font-bold text-lg">100% Secure</span>
+            </div>
+            <div
+              class="absolute -bottom-6 -left-20 w-28 h-28 bg-green-400 rounded-2xl flex items-center justify-center transform -rotate-12"
+            >
+              <span class="text-white font-bold">Fast & Easy</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Tools Section -->
     <section id="tools" class="py-20 px-6 bg-white">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-dark mb-4">Powerful Conversion Tools</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Convert between dozens of file formats with our specialized tools</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Document Tools -->
-                <div class="neumorphic p-8 rounded-2xl tool-card">
-                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-6">
-                        <i class="fas fa-file-alt text-primary text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-dark mb-4">Document Conversion</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>PDF to Word, Excel, PowerPoint</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Word to PDF, HTML, TXT</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Excel to CSV, PDF, HTML</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>eBook format conversion</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Image Tools -->
-                <div class="neumorphic p-8 rounded-2xl tool-card">
-                    <div class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mb-6">
-                        <i class="fas fa-image text-purple-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-dark mb-4">Image Conversion</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>JPG, PNG, GIF, BMP, TIFF</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Resize and compress images</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Convert to WebP format</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>HEIC to JPG conversion</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Audio Tools -->
-                <div class="neumorphic p-8 rounded-2xl tool-card">
-                    <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-6">
-                        <i class="fas fa-music text-red-500 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-dark mb-4">Audio Conversion</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>MP3, WAV, FLAC, AAC, M4A</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Extract audio from video</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Change bitrate and sample rate</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Audio compression</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Video Tools -->
-                <div class="neumorphic p-8 rounded-2xl tool-card">
-                    <div class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center mb-6">
-                        <i class="fas fa-video text-yellow-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-dark mb-4">Video Conversion</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>MP4, MOV, AVI, MKV, WMV</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Compress video files</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Convert video to GIF</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Change resolution and format</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Archive Tools -->
-                <div class="neumorphic p-8 rounded-2xl tool-card">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6">
-                        <i class="fas fa-file-archive text-green-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-dark mb-4">Archive Conversion</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>ZIP, RAR, TAR, 7Z</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Compress and decompress</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Convert between formats</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Password protection</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- OCR Tools -->
-                <div class="neumorphic p-8 rounded-2xl tool-card">
-                    <div class="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center mb-6">
-                        <i class="fas fa-font text-pink-500 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-dark mb-4">OCR & Text Tools</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Image to text conversion</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>PDF text extraction</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Multi-language support</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
-                            <span>Handwriting recognition</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-dark mb-4">
+            Powerful Conversion Tools
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Convert between dozens of file formats with our specialized tools
+          </p>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Document Tools -->
+          <div class="neumorphic p-8 rounded-2xl tool-card">
+            <div
+              class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-file-alt text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-4">
+              Document Conversion
+            </h3>
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>PDF to Word, Excel, PowerPoint</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Word to PDF, HTML, TXT</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Excel to CSV, PDF, HTML</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>eBook format conversion</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Image Tools -->
+          <div class="neumorphic p-8 rounded-2xl tool-card">
+            <div
+              class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-image text-purple-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-4">Image Conversion</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>JPG, PNG, GIF, BMP, TIFF</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Resize and compress images</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Convert to WebP format</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>HEIC to JPG conversion</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Audio Tools -->
+          <div class="neumorphic p-8 rounded-2xl tool-card">
+            <div
+              class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-music text-red-500 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-4">Audio Conversion</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>MP3, WAV, FLAC, AAC, M4A</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Extract audio from video</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Change bitrate and sample rate</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Audio compression</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Video Tools -->
+          <div class="neumorphic p-8 rounded-2xl tool-card">
+            <div
+              class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-video text-yellow-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-4">Video Conversion</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>MP4, MOV, AVI, MKV, WMV</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Compress video files</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Convert video to GIF</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Change resolution and format</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Archive Tools -->
+          <div class="neumorphic p-8 rounded-2xl tool-card">
+            <div
+              class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-file-archive text-green-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-4">Archive Conversion</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>ZIP, RAR, TAR, 7Z</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Compress and decompress</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Convert between formats</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Password protection</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- OCR Tools -->
+          <div class="neumorphic p-8 rounded-2xl tool-card">
+            <div
+              class="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center mb-6"
+            >
+              <i class="fas fa-font text-pink-500 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-4">OCR & Text Tools</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Image to text conversion</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>PDF text extraction</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Multi-language support</span>
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                <span>Handwriting recognition</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Dashboard Section -->
     <section id="dashboard" class="py-20 px-6 bg-gray-50">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-dark mb-4">Your Conversion Dashboard</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Manage your files and track conversion history</p>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Upload Area -->
-                <div class="lg:col-span-2 neumorphic p-8 rounded-2xl">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-dark mb-4">
+            Your Conversion Dashboard
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Manage your files and track conversion history
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Upload Area -->
+          <!--<div class="lg:col-span-2 neumorphic p-8 rounded-2xl">
                     <h3 class="text-xl font-bold text-dark mb-6">Convert Files Now</h3>
                     <div class="upload-area rounded-xl p-10 text-center cursor-pointer mb-8">
                         <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-6">
@@ -459,442 +540,726 @@
                     </div>
                     
                     <button class="btn-primary w-full mt-6 py-3 rounded-lg font-medium text-white">Convert Now</button>
+                </div>-->
+
+          <div class="lg:col-span-2 neumorphic p-8 rounded-2xl">
+            <h3 class="text-xl font-bold text-dark mb-6">Convert Files Now</h3>
+            <form
+              id="conversionForm"
+              action="convert.php"
+              method="POST"
+              enctype="multipart/form-data"
+              class="space-y-6"
+            >
+              <div>
+                <label class="block text-gray-700 mb-2">Choose File</label>
+                <input
+                  type="file"
+                  name="uploadedFile"
+                  required
+                  class="form-input w-full px-4 py-3 rounded-lg border border-gray-300"
+                />
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-gray-700 mb-2">Convert From</label>
+                  <select
+                    name="fromFormat"
+                    required
+                    class="form-input w-full px-4 py-3 rounded-lg border border-gray-300"
+                  >
+                    <option value="pdf">PDF</option>
+                    <option value="docx">DOCX</option>
+                    <option value="jpg">JPG</option>
+                    <option value="png">PNG</option>
+                    <option value="mp3">MP3</option>
+                    <option value="wav">WAV</option>
+                  </select>
                 </div>
-                
-                <!-- Recent Files -->
-                <div class="neumorphic p-8 rounded-2xl">
-                    <h3 class="text-xl font-bold text-dark mb-6">Recent Conversions</h3>
-                    <div class="space-y-4">
-                        <div class="file-item bg-white p-4 rounded-lg flex items-center">
-                            <div class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mr-4">
-                                <i class="fas fa-file-pdf text-red-500"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-medium">document_final.pdf</p>
-                                <p class="text-sm text-gray-500">Converted to DOCX</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-sm text-green-500">Completed</p>
-                                <p class="text-xs text-gray-500">2 hours ago</p>
-                            </div>
-                        </div>
-                        
-                        <div class="file-item bg-white p-4 rounded-lg flex items-center">
-                            <div class="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center mr-4">
-                                <i class="fas fa-image text-purple-500"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-medium">screenshot.png</p>
-                                <p class="text-sm text-gray-500">Converted to JPG</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-sm text-green-500">Completed</p>
-                                <p class="text-xs text-gray-500">5 hours ago</p>
-                            </div>
-                        </div>
-                        
-                        <div class="file-item bg-white p-4 rounded-lg flex items-center">
-                            <div class="w-12 h-12 rounded-lg bg-yellow-100 flex items-center justify-center mr-4">
-                                <i class="fas fa-video text-yellow-500"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-medium">presentation.mp4</p>
-                                <p class="text-sm text-gray-500">Converting to MP3</p>
-                            </div>
-                            <div class="text-right">
-                                <div class="w-20 h-2 bg-gray-200 rounded-full mb-1">
-                                    <div class="progress-bar h-2 rounded-full" style="width: 65%"></div>
-                                </div>
-                                <p class="text-xs text-gray-500">65% complete</p>
-                            </div>
-                        </div>
-                        
-                        <div class="file-item bg-white p-4 rounded-lg flex items-center">
-                            <div class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center mr-4">
-                                <i class="fas fa-file-word text-blue-500"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-medium">report.docx</p>
-                                <p class="text-sm text-gray-500">Converted to PDF</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-sm text-green-500">Completed</p>
-                                <p class="text-xs text-gray-500">1 day ago</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button class="btn-secondary w-full mt-6 py-3 rounded-lg font-medium text-primary">View All History</button>
+                <div>
+                  <label class="block text-gray-700 mb-2">Convert To</label>
+                  <select
+                    name="toFormat"
+                    required
+                    class="form-input w-full px-4 py-3 rounded-lg border border-gray-300"
+                  >
+                    <option value="docx">DOCX</option>
+                    <option value="pdf">PDF</option>
+                    <option value="png">PNG</option>
+                    <option value="jpg">JPG</option>
+                    <option value="wav">WAV</option>
+                    <option value="mp3">MP3</option>
+                  </select>
                 </div>
+              </div>
+
+              <button
+                type="submit"
+                class="btn-primary w-full mt-6 py-3 rounded-lg font-medium text-white"
+              >
+                Convert Now
+              </button>
+            </form>
+          </div>
+
+          <!-- Recent Files -->
+          <div class="neumorphic p-8 rounded-2xl">
+            <h3 class="text-xl font-bold text-dark mb-6">Recent Conversions</h3>
+            <div class="space-y-4">
+              <div class="file-item bg-white p-4 rounded-lg flex items-center">
+                <div
+                  class="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mr-4"
+                >
+                  <i class="fas fa-file-pdf text-red-500"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-medium">document_final.pdf</p>
+                  <p class="text-sm text-gray-500">Converted to DOCX</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm text-green-500">Completed</p>
+                  <p class="text-xs text-gray-500">2 hours ago</p>
+                </div>
+              </div>
+
+              <div class="file-item bg-white p-4 rounded-lg flex items-center">
+                <div
+                  class="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center mr-4"
+                >
+                  <i class="fas fa-image text-purple-500"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-medium">screenshot.png</p>
+                  <p class="text-sm text-gray-500">Converted to JPG</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm text-green-500">Completed</p>
+                  <p class="text-xs text-gray-500">5 hours ago</p>
+                </div>
+              </div>
+
+              <div class="file-item bg-white p-4 rounded-lg flex items-center">
+                <div
+                  class="w-12 h-12 rounded-lg bg-yellow-100 flex items-center justify-center mr-4"
+                >
+                  <i class="fas fa-video text-yellow-500"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-medium">presentation.mp4</p>
+                  <p class="text-sm text-gray-500">Converting to MP3</p>
+                </div>
+                <div class="text-right">
+                  <div class="w-20 h-2 bg-gray-200 rounded-full mb-1">
+                    <div
+                      class="progress-bar h-2 rounded-full"
+                      style="width: 65%"
+                    ></div>
+                  </div>
+                  <p class="text-xs text-gray-500">65% complete</p>
+                </div>
+              </div>
+
+              <div class="file-item bg-white p-4 rounded-lg flex items-center">
+                <div
+                  class="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center mr-4"
+                >
+                  <i class="fas fa-file-word text-blue-500"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-medium">report.docx</p>
+                  <p class="text-sm text-gray-500">Converted to PDF</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm text-green-500">Completed</p>
+                  <p class="text-xs text-gray-500">1 day ago</p>
+                </div>
+              </div>
             </div>
+
+            <button
+              class="btn-secondary w-full mt-6 py-3 rounded-lg font-medium text-primary"
+            >
+              View All History
+            </button>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-20 px-6 bg-white">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-dark mb-4">About ConvertHub</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Your trusted solution for all file conversion needs</p>
-            </div>
-            
-            <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2">
-                    <div class="neumorphic p-10 rounded-2xl">
-                        <h3 class="text-2xl font-bold text-dark mb-6">Our Mission</h3>
-                        <p class="text-gray-600 mb-6">At ConvertHub, we believe that file conversion should be simple, fast, and accessible to everyone. Our mission is to eliminate the frustration of incompatible file formats by providing a comprehensive, user-friendly platform that handles all your conversion needs.</p>
-                        <p class="text-gray-600">Whether you're a student, professional, or casual user, our tools are designed to save you time and effort while maintaining the highest quality output.</p>
-                    </div>
-                </div>
-                
-                <div class="md:w-1/2">
-                    <div class="neumorphic p-10 rounded-2xl">
-                        <h3 class="text-2xl font-bold text-dark mb-6">Technology</h3>
-                        <p class="text-gray-600 mb-6">ConvertHub leverages cutting-edge technology to ensure fast, accurate conversions:</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <i class="fas fa-server text-primary mt-1 mr-3"></i>
-                                <span><span class="font-medium">Cloud Processing:</span> Our distributed systems handle conversions in seconds</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-shield-alt text-green-500 mt-1 mr-3"></i>
-                                <span><span class="font-medium">Military-Grade Encryption:</span> All files are protected with AES-256 encryption</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-bolt text-yellow-500 mt-1 mr-3"></i>
-                                <span><span class="font-medium">Optimized Algorithms:</span> Proprietary conversion engines preserve quality</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-robot text-purple-500 mt-1 mr-3"></i>
-                                <span><span class="font-medium">AI-Powered OCR:</span> Advanced text recognition for scanned documents</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="neumorphic p-10 rounded-2xl mt-12">
-                <h3 class="text-2xl font-bold text-dark mb-6">Why Choose ConvertHub?</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="text-center">
-                        <div class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-lock text-primary text-2xl"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-dark mb-3">Secure & Private</h4>
-                        <p class="text-gray-600">Files are automatically deleted after conversion. We never store or share your data.</p>
-                    </div>
-                    
-                    <div class="text-center">
-                        <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-bolt text-green-500 text-2xl"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-dark mb-3">Fast Processing</h4>
-                        <p class="text-gray-600">Most conversions complete in under 10 seconds, even for large files.</p>
-                    </div>
-                    
-                    <div class="text-center">
-                        <div class="w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-6">
-                            <i class="fas fa-infinity text-purple-500 text-2xl"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-dark mb-3">No Limits</h4>
-                        <p class="text-gray-600">Convert as many files as you need with no size restrictions or hidden fees.</p>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-dark mb-4">About ConvertHub</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Your trusted solution for all file conversion needs
+          </p>
         </div>
+
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="md:w-1/2">
+            <div class="neumorphic p-10 rounded-2xl">
+              <h3 class="text-2xl font-bold text-dark mb-6">Our Mission</h3>
+              <p class="text-gray-600 mb-6">
+                At ConvertHub, we believe that file conversion should be simple,
+                fast, and accessible to everyone. Our mission is to eliminate
+                the frustration of incompatible file formats by providing a
+                comprehensive, user-friendly platform that handles all your
+                conversion needs.
+              </p>
+              <p class="text-gray-600">
+                Whether you're a student, professional, or casual user, our
+                tools are designed to save you time and effort while maintaining
+                the highest quality output.
+              </p>
+            </div>
+          </div>
+
+          <div class="md:w-1/2">
+            <div class="neumorphic p-10 rounded-2xl">
+              <h3 class="text-2xl font-bold text-dark mb-6">Technology</h3>
+              <p class="text-gray-600 mb-6">
+                ConvertHub leverages cutting-edge technology to ensure fast,
+                accurate conversions:
+              </p>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <i class="fas fa-server text-primary mt-1 mr-3"></i>
+                  <span
+                    ><span class="font-medium">Cloud Processing:</span> Our
+                    distributed systems handle conversions in seconds</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-shield-alt text-green-500 mt-1 mr-3"></i>
+                  <span
+                    ><span class="font-medium">Military-Grade Encryption:</span>
+                    All files are protected with AES-256 encryption</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-bolt text-yellow-500 mt-1 mr-3"></i>
+                  <span
+                    ><span class="font-medium">Optimized Algorithms:</span>
+                    Proprietary conversion engines preserve quality</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-robot text-purple-500 mt-1 mr-3"></i>
+                  <span
+                    ><span class="font-medium">AI-Powered OCR:</span> Advanced
+                    text recognition for scanned documents</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="neumorphic p-10 rounded-2xl mt-12">
+          <h3 class="text-2xl font-bold text-dark mb-6">
+            Why Choose ConvertHub?
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <div
+                class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-6"
+              >
+                <i class="fas fa-lock text-primary text-2xl"></i>
+              </div>
+              <h4 class="text-xl font-bold text-dark mb-3">Secure & Private</h4>
+              <p class="text-gray-600">
+                Files are automatically deleted after conversion. We never store
+                or share your data.
+              </p>
+            </div>
+
+            <div class="text-center">
+              <div
+                class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6"
+              >
+                <i class="fas fa-bolt text-green-500 text-2xl"></i>
+              </div>
+              <h4 class="text-xl font-bold text-dark mb-3">Fast Processing</h4>
+              <p class="text-gray-600">
+                Most conversions complete in under 10 seconds, even for large
+                files.
+              </p>
+            </div>
+
+            <div class="text-center">
+              <div
+                class="w-20 h-20 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-6"
+              >
+                <i class="fas fa-infinity text-purple-500 text-2xl"></i>
+              </div>
+              <h4 class="text-xl font-bold text-dark mb-3">No Limits</h4>
+              <p class="text-gray-600">
+                Convert as many files as you need with no size restrictions or
+                hidden fees.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 px-6 bg-gray-50">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-dark mb-4">Contact Us</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Have questions or feedback? We'd love to hear from you!</p>
-            </div>
-            
-            <div class="neumorphic p-10 rounded-2xl">
-                <div id="successMessage" class="hidden bg-green-100 text-green-700 p-4 rounded-lg mb-6">
-                    <div class="flex items-center">
-                        <i class="fas fa-check-circle text-green-500 text-xl mr-3"></i>
-                        <span class="font-medium">Your message has been sent successfully!</span>
-                    </div>
-                </div>
-                
-                <form id="contactForm">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label class="block text-gray-700 mb-2">Name</label>
-                            <input type="text" class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary" required>
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 mb-2">Email</label>
-                            <input type="email" class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary" required>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-gray-700 mb-2">Subject</label>
-                        <input type="text" class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary" required>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label class="block text-gray-700 mb-2">Message</label>
-                        <textarea rows="5" class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary" required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary w-full py-3 rounded-lg font-medium text-white">Send Message</button>
-                </form>
-            </div>
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-dark mb-4">Contact Us</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Have questions or feedback? We'd love to hear from you!
+          </p>
         </div>
+
+        <div class="neumorphic p-10 rounded-2xl">
+          <div
+            id="successMessage"
+            class="hidden bg-green-100 text-green-700 p-4 rounded-lg mb-6"
+          >
+            <div class="flex items-center">
+              <i class="fas fa-check-circle text-green-500 text-xl mr-3"></i>
+              <span class="font-medium"
+                >Your message has been sent successfully!</span
+              >
+            </div>
+          </div>
+
+          <form id="contactForm">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label class="block text-gray-700 mb-2">Name</label>
+                <input
+                  type="text"
+                  class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-gray-700 mb-2">Email</label>
+                <input
+                  type="email"
+                  class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2">Subject</label>
+              <input
+                type="text"
+                class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                required
+              />
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2">Message</label>
+              <textarea
+                rows="5"
+                class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="btn-primary w-full py-3 rounded-lg font-medium text-white"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-dark text-white py-12 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center mb-6">
-                        <div class="w-10 h-10 rounded-full bg-[#FF6B35] flex items-center justify-center mr-3">
-                            <i class="fas fa-exchange-alt text-white text-lg"></i>
-                        </div>
-                        <span class="text-xl font-bold text-white">Convertly</span>
-                    </div>
-                    <p class="text-gray-400 mb-6">Convert files faster and easier than ever before.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="#tools" class="text-gray-400 hover:text-white">Tools</a></li>
-                        <li><a href="#dashboard" class="text-gray-400 hover:text-white">Dashboard</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white">About</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Tools</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Document Converter</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Image Converter</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Audio Converter</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Video Converter</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">OCR Tool</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Newsletter</h4>
-                    <p class="text-gray-400 mb-4">Subscribe to get updates on new features.</p>
-                    <form class="flex">
-                        <input type="email" placeholder="Your email" class="px-4 py-3 rounded-l-lg w-full focus:outline-none text-gray-800">
-                        <button class="bg-primary px-4 py-3 rounded-r-lg text-white">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
+      <div class="max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center mb-6">
+              <div
+                class="w-10 h-10 rounded-full bg-[#FF6B35] flex items-center justify-center mr-3"
+              >
+                <i class="fas fa-exchange-alt text-white text-lg"></i>
+              </div>
+              <span class="text-xl font-bold text-white">Convertly</span>
             </div>
-            
-            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
-                <p>&copy; 2023 ConvertHub. All rights reserved.</p>
+            <p class="text-gray-400 mb-6">
+              Convert files faster and easier than ever before.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
             </div>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+            <ul class="space-y-3">
+              <li>
+                <a href="#home" class="text-gray-400 hover:text-white">Home</a>
+              </li>
+              <li>
+                <a href="#tools" class="text-gray-400 hover:text-white"
+                  >Tools</a
+                >
+              </li>
+              <li>
+                <a href="#dashboard" class="text-gray-400 hover:text-white"
+                  >Dashboard</a
+                >
+              </li>
+              <li>
+                <a href="#about" class="text-gray-400 hover:text-white"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a href="#contact" class="text-gray-400 hover:text-white"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-bold mb-6">Tools</h4>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Document Converter</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Image Converter</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Audio Converter</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Video Converter</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">OCR Tool</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-bold mb-6">Newsletter</h4>
+            <p class="text-gray-400 mb-4">
+              Subscribe to get updates on new features.
+            </p>
+            <form class="flex">
+              <input
+                type="email"
+                placeholder="Your email"
+                class="px-4 py-3 rounded-l-lg w-full focus:outline-none text-gray-800"
+              />
+              <button class="bg-primary px-4 py-3 rounded-r-lg text-white">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
         </div>
+
+        <div
+          class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500"
+        >
+          <p>&copy; 2023 ConvertHub. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
 
     <!-- Login Modal -->
-    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="glass-card w-full max-w-md p-8 rounded-2xl">
-            <div class="flex justify-between items-center mb-8">
-                <h3 class="text-2xl font-bold text-dark">Log In</h3>
-                <button id="closeLoginModal" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <form>
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2">Email</label>
-                    <input type="email" class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary" required>
-                </div>
-                
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2">Password</label>
-                    <input type="password" class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary" required>
-                </div>
-                
-                <div class="flex items-center justify-between mb-6">
-                    <div class="flex items-center">
-                        <input type="checkbox" id="remember" class="mr-2">
-                        <label for="remember" class="text-gray-700">Remember me</label>
-                    </div>
-                    <a href="#" class="text-primary hover:underline">Forgot password?</a>
-                </div>
-                
-                <button class="btn-primary w-full py-3 rounded-lg font-medium text-white mb-6">Log In</button>
-                
-                <div class="text-center">
-                    <p class="text-gray-700">Don't have an account? <a href="#" id="showRegisterModal" class="text-primary font-medium hover:underline">Sign Up</a></p>
-                </div>
-            </form>
+    <div
+      id="loginModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+    >
+      <div class="glass-card w-full max-w-md p-8 rounded-2xl">
+        <div class="flex justify-between items-center mb-8">
+          <h3 class="text-2xl font-bold text-dark">Log In</h3>
+          <button
+            id="closeLoginModal"
+            class="text-gray-500 hover:text-gray-700"
+          >
+            <i class="fas fa-times"></i>
+          </button>
         </div>
+
+        <form>
+          <div class="mb-6">
+            <label class="block text-white mb-2">Email</label>
+            <input
+              type="email"
+              class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+              required
+            />
+          </div>
+
+          <div class="mb-6">
+            <label class="block text-white mb-2">Password</label>
+            <input
+              type="password"
+              class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+              required
+            />
+          </div>
+
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center">
+              <input type="checkbox" id="remember" class="mr-2" />
+              <label for="remember" class="text-gray-700">Remember me</label>
+            </div>
+            <a href="#" class="text-primary hover:underline"
+              >Forgot password?</a
+            >
+          </div>
+
+          <button
+            class="btn-primary w-full py-3 rounded-lg font-medium text-white mb-6"
+          >
+            Log In
+          </button>
+
+          <div class="text-center">
+            <p class="text-gray-700">
+              Don't have an account?
+              <a
+                href="#"
+                id="showRegisterModal"
+                class="text-primary font-medium hover:underline"
+                >Sign Up</a
+              >
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Register Modal -->
-    <div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="glass-card w-full max-w-md p-8 rounded-2xl">
-            <div class="flex justify-between items-center mb-8">
-                <h3 class="text-2xl font-bold text-dark">Create Account</h3>
-                <button id="closeRegisterModal" class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            
-            <form>
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2">Full Name</label>
-                    <input type="text" class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary" required>
-                </div>
-                
-                <div class="mb-6">
-                    <label class="block text-gray-700 mb-2">Email</label>
-                    <input type="email" class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary" required>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                        <label class="block text-gray-700 mb-2">Password</label>
-                        <input type="password" class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary" required>
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 mb-2">Confirm Password</label>
-                        <input type="password" class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary" required>
-                    </div>
-                </div>
-                
-                <div class="flex items-center mb-6">
-                    <input type="checkbox" id="terms" class="mr-2" required>
-                    <label for="terms" class="text-gray-700">I agree to the <a href="#" class="text-primary hover:underline">Terms & Conditions</a></label>
-                </div>
-                
-                <button class="btn-primary w-full py-3 rounded-lg font-medium text-white mb-6">Create Account</button>
-                
-                <div class="text-center">
-                    <p class="text-gray-700">Already have an account? <a href="#" id="showLoginModal" class="text-primary font-medium hover:underline">Log In</a></p>
-                </div>
-            </form>
+    <div
+      id="registerModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden"
+    >
+      <div class="glass-card w-full max-w-md p-8 rounded-2xl">
+        <div class="flex justify-between items-center mb-8">
+          <h3 class="text-2xl font-bold text-dark">Create Account</h3>
+          <button
+            id="closeRegisterModal"
+            class="text-gray-500 hover:text-gray-700"
+          >
+            <i class="fas fa-times"></i>
+          </button>
         </div>
+
+        <form>
+          <div class="mb-6">
+            <label class="block text-white mb-2">Full Name</label>
+            <input
+              type="text"
+              class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+              required
+            />
+          </div>
+
+          <div class="mb-6">
+            <label class="block text-white mb-2">Email</label>
+            <input
+              type="email"
+              class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+              required
+            />
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label class="block text-white mb-2">Password</label>
+              <input
+                type="password"
+                class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-white mb-2">Confirm Password</label>
+              <input
+                type="password"
+                class="form-input w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-primary"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="flex items-center mb-6">
+            <input type="checkbox" id="terms" class="mr-2" required />
+            <label for="terms" class="text-gray-700"
+              >I agree to the
+              <a href="#" class="text-primary hover:underline"
+                >Terms & Conditions</a
+              ></label
+            >
+          </div>
+
+          <button
+            class="btn-primary w-full py-3 rounded-lg font-medium text-white mb-6"
+          >
+            Create Account
+          </button>
+
+          <div class="text-center">
+            <p class="text-gray-700">
+              Already have an account?
+              <a
+                href="#"
+                id="showLoginModal"
+                class="text-primary font-medium hover:underline"
+                >Log In</a
+              >
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
 
     <script>
-        // Modal functionality
-        const loginBtn = document.getElementById('loginBtn');
-        const signupBtn = document.getElementById('signupBtn');
-        const loginModal = document.getElementById('loginModal');
-        const registerModal = document.getElementById('registerModal');
-        const closeLoginModal = document.getElementById('closeLoginModal');
-        const closeRegisterModal = document.getElementById('closeRegisterModal');
-        const showRegisterModal = document.getElementById('showRegisterModal');
-        const showLoginModal = document.getElementById('showLoginModal');
-        
-        loginBtn.addEventListener('click', () => {
-            loginModal.classList.remove('hidden');
-        });
-        
-        signupBtn.addEventListener('click', () => {
-            registerModal.classList.remove('hidden');
-        });
-        
-        closeLoginModal.addEventListener('click', () => {
-            loginModal.classList.add('hidden');
-        });
-        
-        closeRegisterModal.addEventListener('click', () => {
-            registerModal.classList.add('hidden');
-        });
-        
-        showRegisterModal.addEventListener('click', (e) => {
-            e.preventDefault();
-            loginModal.classList.add('hidden');
-            registerModal.classList.remove('hidden');
-        });
-        
-        showLoginModal.addEventListener('click', (e) => {
-            e.preventDefault();
-            registerModal.classList.add('hidden');
-            loginModal.classList.remove('hidden');
-        });
-        
-        // Close modals when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
-                loginModal.classList.add('hidden');
-            }
-            if (e.target === registerModal) {
-                registerModal.classList.add('hidden');
-            }
-        });
-        
-        // Contact form submission
-        const contactForm = document.getElementById('contactForm');
-        const successMessage = document.getElementById('successMessage');
-        
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Simulate form submission
-            setTimeout(() => {
-                contactForm.reset();
-                successMessage.classList.remove('hidden');
-                successMessage.classList.add('success-animation');
-                
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    successMessage.classList.add('hidden');
-                }, 5000);
-            }, 1000);
-        });
-        
-        // Start Converting button scroll to convert area
-        const startConvertingBtn = document.getElementById('startConvertingBtn');
-        startConvertingBtn.addEventListener('click', () => {
-            const convertSection = document.getElementById('dashboard');
-            window.scrollTo({
-                top: convertSection.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        });
+      // Modal functionality
+      const loginBtn = document.getElementById("loginBtn");
+      const signupBtn = document.getElementById("signupBtn");
+      const loginModal = document.getElementById("loginModal");
+      const registerModal = document.getElementById("registerModal");
+      const closeLoginModal = document.getElementById("closeLoginModal");
+      const closeRegisterModal = document.getElementById("closeRegisterModal");
+      const showRegisterModal = document.getElementById("showRegisterModal");
+      const showLoginModal = document.getElementById("showLoginModal");
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Simulate file conversion progress
-        setInterval(() => {
-            const progressBar = document.querySelector('.progress-bar');
-            if (progressBar) {
-                const currentWidth = parseInt(progressBar.style.width);
-                if (currentWidth < 100) {
-                    progressBar.style.width = (currentWidth + 5) + '%';
-                }
-            }
+      loginBtn.addEventListener("click", () => {
+        loginModal.classList.remove("hidden");
+        document.body.classList.add("overflow-hidden");
+      });
+
+      signupBtn.addEventListener("click", () => {
+        registerModal.classList.remove("hidden");
+        document.body.classList.add("overflow-hidden");
+      });
+
+      closeLoginModal.addEventListener("click", () => {
+        document.body.classList.remove("overflow-hidden");
+        loginModal.classList.add("hidden");
+      });
+
+      closeRegisterModal.addEventListener("click", () => {
+        registerModal.classList.add("hidden");
+        document.body.classList.remove("overflow-hidden");
+      });
+
+      showRegisterModal.addEventListener("click", (e) => {
+        e.preventDefault();
+        loginModal.classList.add("hidden");
+        registerModal.classList.remove("hidden");
+      });
+
+      showLoginModal.addEventListener("click", (e) => {
+        e.preventDefault();
+        registerModal.classList.add("hidden");
+        loginModal.classList.remove("hidden");
+      });
+
+      // Close modals when clicking outside
+      window.addEventListener("click", (e) => {
+        if (e.target === loginModal) {
+          loginModal.classList.add("hidden");
+          document.body.classList.remove("overflow-hidden");
+        }
+        if (e.target === registerModal) {
+          registerModal.classList.add("hidden");
+          document.body.classList.remove("overflow-hidden");
+        }
+      });
+
+      // Contact form submission
+      const contactForm = document.getElementById("contactForm");
+      const successMessage = document.getElementById("successMessage");
+
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // Simulate form submission
+        setTimeout(() => {
+          contactForm.reset();
+          successMessage.classList.remove("hidden");
+          successMessage.classList.add("success-animation");
+
+          // Hide success message after 5 seconds
+          setTimeout(() => {
+            successMessage.classList.add("hidden");
+          }, 5000);
         }, 1000);
+      });
+
+      // Start Converting button scroll to convert area
+      document.addEventListener("DOMContentLoaded", () => {
+        const startConvertingBtn =
+          document.getElementById("startConvertingBtn");
+        if (startConvertingBtn) {
+          startConvertingBtn.addEventListener("click", () => {
+            const targetSection = document.getElementById("dashboard");
+            if (targetSection) {
+              window.scrollTo({
+                top: targetSection.offsetTop - 80,
+                behavior: "smooth",
+              });
+            }
+          });
+        }
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          const targetElement = document.querySelector(targetId);
+
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Simulate file conversion progress
+      setInterval(() => {
+        const progressBar = document.querySelector(".progress-bar");
+        if (progressBar) {
+          const currentWidth = parseInt(progressBar.style.width);
+          if (currentWidth < 100) {
+            progressBar.style.width = currentWidth + 5 + "%";
+          }
+        }
+      }, 1000);
     </script>
-</body>
+  </body>
 </html>
